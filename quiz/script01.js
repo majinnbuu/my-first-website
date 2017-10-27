@@ -31,17 +31,17 @@ var app = {
 				if (selectedIndex >=0) {
 					selectedAnswer=selectedIndex;
 					$('#1'+selectedIndex).addClass('selected');
-					$('checkAnswer').show();
+					$('#checkAnswer').show();
 				}else {
 					selectedAnswer= -1;
 					$('#checkAnswer').hide();
 				}	
 			};
 
-			$('#14').click(function(){
+			$('#10').click(function(){
 				highlightOption(0);
 			});
-			$('#13').click(function(){
+			$('#11').click(function(){
 				console.log('Clicked 1');
 				highlightOption(1);
 			});
@@ -49,23 +49,23 @@ var app = {
 				console.log('Clicked 2');
 				highlightOption(2);
 			});
-			$('#11').click(function(){
+			$('#13').click(function(){
 				console.log('Clicked 2');
 				highlightOption(3)
 			});
 
 			var currentQuestion=0
 			fetchQuestion(data.results[currentQuestion]);
-			$('#nextQuestion').hide();
+			$('#nextQuestion').show();
 			$('#scorecard').html('0 / 10');
 
 			var score= 0;
 			 $('#checkAnswer').click( function(){
-			 	if (data.results.currentQuestion.correct_answer=== $('#1' + selectedAnswer).html()) {
+			 	if (data.results[currentQuestion].correct_answer === $('#1' + selectedAnswer).html()) {
 			 		score++;
-			 		$('#scorecard').html('Correct! ${score} / 10');
+			 		$('#scorecard').html(`Correct! ${score} / 10`);
 			 	} else {
-			 		$('#scorecard').html('Incorrect! ${score} / 10');
+			 		$('#scorecard').html(`Incorrect! ${score}/ 10`);
 			 	}
 			 	$('#nextQuestion').show();
 			 	$('#checkAnswer').hide();
@@ -73,13 +73,13 @@ var app = {
 
 			 $('#nextQuestion').click(function(){
 			 	currentQuestion++;
-			 	if (currentQuestion >= 15) {
+			 	if (currentQuestion >= 10) {
 			 		$('#scorecard').html('Quiz complete. You scored: ${score} / 10. Congatulations!');
 			 	} else {
 			 		fetchQuestion(data.results[currentQuestion]);
-			 		$('#scorecard').html('${score} / 10');
+			 		$('#scorecard').html(`${score} / 10`);
 			 	}
-			 	$('#nextQuestion').hide();
+			 	$('#nextQuestion').show();
 			 });
 			});
 	},
